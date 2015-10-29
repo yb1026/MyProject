@@ -25,19 +25,7 @@
          android:layout_height="200dip"
          />
      
-     
-     
-     
-     <android.opengl.GLSurfaceView
-         android:id="@+id/image"
-         android:layout_below="@id/roundprogress"
-         android:layout_marginTop="20dip"
-         android:background="#F0FFFF"
-         android:layout_height="200dip"
-         android:layout_width="200dip"
-         android:visibility="gone"/>
-     
-     
+
          <com.han.myproject.FiveDimensionView
          android:id="@+id/fiveimage"
          android:background="#F0FFFF"

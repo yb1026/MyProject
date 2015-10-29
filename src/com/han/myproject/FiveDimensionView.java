@@ -1,12 +1,16 @@
 package com.han.myproject;
 
+import java.math.BigDecimal;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.PathShape;
@@ -21,22 +25,37 @@ import android.view.View;
  */
 public class FiveDimensionView extends View {
 
-	private String bigColor = "#C0C0C0";
-	private String smallColor = "#0E9BC9";
-	private String textColor = "#000000";
-	private float textSize = 60.0f;
+	// 变量
+	private Context context;
+	private final int score = 600;
+	private final float[] proScale = new float[] { 0.8f, 0.5f, 0.4f, 0.5f, 0.3f };
 
-	float[] bx = new float[5];
-	float[] by = new float[5];
-	float[] sx = new float[5];
-	float[] sy = new float[5];
+	// 各个参数
+	private final String bigColor = "#C0C0C0";
+	private final String smallColor = "#0E9BC9";
+	private final String textColor = "#000000";
+	private final float textSize = 60.0f;
+	private final String lineColor = "#666666";
 
-	private int score = 600;
-	private float pro1 = 0.8f;
-	private float pro2 = 0.5f;
-	private float pro3 = 0.4f;
-	private float pro4 = 0.5f;
-	private float pro5 = 0.3f;
+	private float centre;
+	private final float fiveDinScale = 0.6f;
+	private final float bitmapScale = 0.25f;
+	private final float paddingScale = 0.08f;
+	// 五边形起始角度(顶点按顺时针排序,角度数递减)
+	private final int startAngle = 90;
+
+	private final float[] bx = new float[5];
+	private final float[] by = new float[5];
+	private final float[] sx = new float[5];
+	private final float[] sy = new float[5];
+	private final float[] imageLeft = new float[5];
+	private final float[] imageTop = new float[5];
+
+	private final int[] drawableIds = new int[] { R.drawable.fiveimage1,
+			R.drawable.fiveimage2, R.drawable.fiveimage3,
+			R.drawable.fiveimage4, R.drawable.fiveimage5 };
+
+	private final Bitmap[] bitmaps = new Bitmap[5];
 
 	public FiveDimensionView(Context context) {
 		this(context, null);
@@ -48,6 +67,25 @@ public class FiveDimensionView extends View {
 
 	public FiveDimensionView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.context = context;
+	}
+
+	private Bitmap getImageBitMap(int id) {
+		int newSize = floatToInt(this.centre
+				* this.bitmapScale);
+		Bitmap  temp = BitmapFactory.decodeResource(this.context.getResources(), id);
+        float width = temp.getWidth();
+        float height = temp.getHeight();
+        // 创建操作图片用的matrix对象
+        Matrix matrix = new Matrix();
+        // 计算宽高缩放率
+        float scaleWidth = ((float) newSize) / width;
+        float scaleHeight = ((float) newSize) / height;
+        // 缩放图片动作
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap bitmap = Bitmap.createBitmap(temp, 0, 0, (int) width,
+                        (int) height, matrix, true);
+        return bitmap;
 	}
 
 	@SuppressLint("DrawAllocation")
@@ -55,9 +93,29 @@ public class FiveDimensionView extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		float centre = getWidth() / 2;
-		initData(centre);
+		this.centre = getWidth() / 2;
+		// 初始化五边形各个点数据
+		initData();
+		// 初始化五域图形位置数据
+		initFiveImagesData();
+		// 大五边形
+		bigFiveDin(canvas);
+		// 小五边形
+		smallFiveDin(canvas);
+		// 内外边框
+		tenLine(canvas);
+		// 中间文字
+		centerText(canvas);
+		// 五个域图形
+		fiveImages(canvas);
+	}
 
+	/**
+	 * 大五边形
+	 * 
+	 * @param canvas
+	 */
+	private void bigFiveDin(Canvas canvas) {
 		Path bpath = new Path();
 		bpath.moveTo(bx[0], by[0]);
 		for (int i = 1; i < 5; i++) {
@@ -69,7 +127,15 @@ public class FiveDimensionView extends View {
 		bDrawable.getPaint().setColor(Color.parseColor(bigColor));
 		bDrawable.setBounds(0, 0, 100, 100);
 		bDrawable.draw(canvas);
+		bpath.close();
+	}
 
+	/**
+	 * 小五边形
+	 * 
+	 * @param canvas
+	 */
+	private void smallFiveDin(Canvas canvas) {
 		Path spath = new Path();
 
 		spath.moveTo(sx[0], sy[0]);
@@ -77,17 +143,23 @@ public class FiveDimensionView extends View {
 			spath.lineTo(sx[i], sy[i]);
 		}
 
-		bpath.close();
 		ShapeDrawable sDrawable = new ShapeDrawable(new PathShape(spath, 100,
 				100));
 		sDrawable.getPaint().setColor(Color.parseColor(smallColor));
 		sDrawable.setBounds(0, 0, 100, 100);
 		sDrawable.draw(canvas);
+		spath.close();
+	}
 
-		// 十根线
+	/**
+	 * 十根线内外边框
+	 * 
+	 * @param canvas
+	 */
+	private void tenLine(Canvas canvas) {
 		Paint linePaint = new Paint();
 		linePaint.setStrokeWidth(1);
-		linePaint.setColor(Color.parseColor("#666666"));
+		linePaint.setColor(Color.parseColor(lineColor));
 
 		for (int i = 0; i < 5; i++) {
 			canvas.drawLine(centre, centre, bx[i], by[i], linePaint);
@@ -97,7 +169,14 @@ public class FiveDimensionView extends View {
 			}
 			canvas.drawLine(bx[i], by[i], bx[k], by[k], linePaint);
 		}
+	}
 
+	/**
+	 * 中央字体
+	 * 
+	 * @param canvas
+	 */
+	private void centerText(Canvas canvas) {
 		Paint paint = new Paint();
 		paint.setStrokeWidth(0);
 		paint.setColor(Color.parseColor(textColor));
@@ -107,55 +186,75 @@ public class FiveDimensionView extends View {
 
 		canvas.drawText(String.valueOf(score), centre - textWidth / 2, centre
 				+ textSize / 3, paint); // 画出进度百分比
+	}
+
+	/**
+	 * 五个域的图形
+	 * 
+	 * @param canvas
+	 */
+	private void fiveImages(Canvas canvas) {
+		for (int i = 0; i < 5; i++) {
+			canvas.drawBitmap(bitmaps[i], imageLeft[i], imageTop[i], null);
+		}
 
 	}
 
-	private void initData(float centre) {
-		float len = centre / 2;
-		bx[0] = centre;
-		bx[1] = centre + cos18(len);
-		bx[2] = centre + cos54(len);
-		bx[3] = centre - cos54(len);
-		bx[4] = centre - cos18(len);
+	private void initFiveImagesData() {
+		for (int i = 0; i < 5; i++) {
+			bitmaps[i] = this.getImageBitMap(this.drawableIds[i]);
+		}
+		float imageMargin = paddingScale*this.centre;
+		
+		imageLeft[0] = bx[0] + cos(imageMargin, startAngle - 0 * 360 / 5)
+				- bitmaps[0].getWidth() / 2;
+		imageTop[0] = by[0] - sin(imageMargin, startAngle - 0 * 360 / 5)
+				- bitmaps[0].getHeight()*0.8f;
 
-		by[0] = centre - len;
-		by[1] = centre - sin18(len);
-		by[2] = centre + sin54(len);
-		by[3] = centre + sin54(len);
-		by[4] = centre - sin18(len);
+		imageLeft[1] = bx[1] + cos(imageMargin, startAngle - 1 * 360 / 5) - 0;
+		imageTop[1] = by[1] - sin(imageMargin, startAngle - 1 * 360 / 5)
+				- bitmaps[1].getHeight() / 2;
 
-		sx[0] = centre;
-		sx[1] = centre + cos18(len * pro2);
-		sx[2] = centre + cos54(len * pro3);
-		sx[3] = centre - cos54(len * pro4);
-		sx[4] = centre - cos18(len * pro5);
+		imageLeft[2] = bx[2] + cos(imageMargin, startAngle - 2 * 360 / 5) - 0;
+		imageTop[2] = by[2] - sin(imageMargin, startAngle - 2 * 360 / 5)
+				- bitmaps[2].getHeight() / 5;
 
-		sy[0] = centre - len * pro1;
-		sy[1] = centre - sin18(len * pro2);
-		sy[2] = centre + sin54(len * pro3);
-		sy[3] = centre + sin54(len * pro4);
-		sy[4] = centre - sin18(len * pro5);
+		imageLeft[3] = bx[3] + cos(imageMargin, startAngle - 3 * 360 / 5)
+				- bitmaps[3].getWidth();
+		imageTop[3] = by[3] - sin(imageMargin, startAngle - 3 * 360 / 5)
+				- bitmaps[3].getHeight() / 5;
+
+		imageLeft[4] = bx[4] + cos(imageMargin, startAngle - 4 * 360 / 5)
+				- bitmaps[4].getWidth();
+		imageTop[4] = by[4] - sin(imageMargin, startAngle - 4 * 360 / 5)
+				- bitmaps[3].getHeight() / 2;
 
 	}
 
-	private float cos18(float len) {
-		Double retr = len * Math.cos(2 * Math.PI * 18 / 360);
+	private void initData() {
+		float len = centre * fiveDinScale;
+		for (int i = 0; i < 5; i++) {
+			bx[i] = centre + cos(len, startAngle - i * 360 / 5);
+			by[i] = centre - sin(len, startAngle - i * 360 / 5);
+			sx[i] = centre + cos(len * proScale[i], startAngle - i * 360 / 5);
+			sy[i] = centre - sin(len * proScale[i], startAngle - i * 360 / 5);
+		}
+	}
+
+	private float sin(float len, int c) {
+		Double retr = len * Math.sin(2 * Math.PI * c / 360);
 		return Float.parseFloat(retr.toString());
 	}
 
-	private float sin18(float len) {
-		Double retr = len * Math.sin(2 * Math.PI * 18 / 360);
+	private float cos(float len, int c) {
+		Double retr = len * Math.cos(2 * Math.PI * c / 360);
 		return Float.parseFloat(retr.toString());
 	}
 
-	private float cos54(float len) {
-		Double retr = len * Math.cos(2 * Math.PI * 54 / 360);
-		return Float.parseFloat(retr.toString());
-	}
-
-	private float sin54(float len) {
-		Double retr = len * Math.sin(2 * Math.PI * 54 / 360);
-		return Float.parseFloat(retr.toString());
+	private int floatToInt(float i) {
+		BigDecimal b = new BigDecimal(i);
+		b.setScale(0, BigDecimal.ROUND_HALF_UP);
+		return b.intValue();
 	}
 
 }

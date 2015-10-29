@@ -1,7 +1,6 @@
 package com.han.myproject;
 
 import android.app.Activity;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +10,8 @@ public class MainActivity extends Activity {
 
 	private RoundProgressBar  roundprogress;
 	private FiveDimensionView  fiveimage;
-	private GLSurfaceView gLSurfaceView;
+	
+	
 	
 	private Button btn;
     @Override
@@ -19,9 +19,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = (Button)this.findViewById(R.id.btn);
-        gLSurfaceView = (GLSurfaceView)this.findViewById(R.id.image);
-        FiveDimensionRenderer   renderer = new FiveDimensionRenderer(this);
-        gLSurfaceView.setRenderer(renderer);
         
         
         btn.setOnClickListener(new OnClickListener() {
@@ -35,6 +32,7 @@ public class MainActivity extends Activity {
         roundprogress.setProgress(50);
         
         fiveimage = (FiveDimensionView)this.findViewById(R.id.fiveimage);
+        fiveimage.setVisibility(View.VISIBLE);
      
     }
 
