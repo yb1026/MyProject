@@ -93,7 +93,7 @@ public class RoundProgressBar extends View {
 				R.styleable.RoundProgressBar_processColor2, Color.GREEN);
 
 		textSize = mTypedArray.getDimension(
-				R.styleable.RoundProgressBar_textSize, 15);
+				R.styleable.RoundProgressBar_roundTextSize, 15);
 
 		roundWidth = mTypedArray.getDimension(
 				R.styleable.RoundProgressBar_roundWidth, 5);
@@ -109,7 +109,7 @@ public class RoundProgressBar extends View {
 		
 		paint.setShader(null);//取消渲染效果
 		/**
-		 * 画最外层的大圆环
+		 * 画圆环
 		 */
 		int centre = getWidth() / 2; // 获取圆心的x坐标
 		int radius = (int) (centre - roundWidth / 2); // 圆环的半径
@@ -137,7 +137,7 @@ public class RoundProgressBar extends View {
 		}
 
 		/**
-		 * 画圆弧 ，画圆环的进度
+		 * 画圆弧 ，圆环的进度
 		 */
 		sweepGradient = new SweepGradient(centre, centre,
 				new int[] { processColor1, processColor2 }, null);

@@ -6,7 +6,7 @@
 
     <style name="roundprogress_style">
         <item name="roundWidth">15dip</item>
-        <item name="textSize">40sp</item>
+        <item name="roundTextSize">40sp</item>
          <item name="textColor">#909090</item>
         <item name="processColor1">#3498db</item>
         <item name="processColor2">#05f500</item>

@@ -20,13 +20,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         btn = (Button)this.findViewById(R.id.btn);
         
-        
         btn.setOnClickListener(new OnClickListener() {
-			
 			public void onClick(View arg0) {
 				roundprogress.start(90);
 			}
 		});
+        
         roundprogress = (RoundProgressBar)this.findViewById(R.id.roundprogress);
         
         roundprogress.setProgress(50);

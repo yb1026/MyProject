@@ -6,34 +6,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
-    
+    tools:context=".MainActivity" xmlns:app="http://schemas.android.com/apk/res/com.han.myproject">
+
     <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="按这里"/>
-    
+        android:text="按这里" />
 
-     <com.han.myproject.RoundProgressBar
-         android:id="@+id/roundprogress"
-         style="@style/roundprogress_style"
-         android:layout_width="200dip"
-         android:layout_below="@id/btn"
-         android:background="#F0FFFF"
-         android:layout_centerInParent="true"
-         android:layout_height="200dip"
-         />
-     
+    <com.han.myproject.RoundProgressBar
+        android:id="@+id/roundprogress"
+        style="@style/roundprogress_style"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        app:roundTextSize="12sp"
+        android:layout_below="@id/btn"
+        android:layout_centerInParent="true"
+        android:background="#F0FFFF" />
 
-         <com.han.myproject.FiveDimensionView
-         android:id="@+id/fiveimage"
-         android:background="#F0FFFF"
-         android:layout_below="@id/roundprogress"
-         android:layout_marginTop="20dip"
-         android:layout_height="200dip"
-         android:layout_width="200dip"
-         android:visibility="visible"/>
-
+    <com.han.myproject.FiveDimensionView
+        android:id="@+id/fiveimage"
+        android:layout_width="300dip"
+        android:layout_height="300dip"
+        android:layout_below="@id/roundprogress"
+        android:layout_marginTop="20dip"
+        android:background="#F0FFFF"
+        android:visibility="visible" />
 
 </RelativeLayout>
