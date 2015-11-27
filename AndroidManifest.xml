@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.han.myproject"
+    android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="1.0" android:installLocation="preferExternal">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 文件写入SD卡权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".imageloader.UILApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-        
-        
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -25,10 +29,79 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
-        
-        
+
+        <!-- 自定义 视图 -->
+
+        <activity
+            android:name=".myView.MyViewActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MyViewActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- imageloader -->
+        <activity
+            android:name=".imageloader.HomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.HomeActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".imageloader.ImageListActivity"
+            android:label="@string/ac_name_image_list" />
+        <activity
+            android:name=".imageloader.ImageGridActivity"
+            android:label="@string/ac_name_image_grid" />
+        <activity
+            android:name=".imageloader.ImagePagerActivity"
+            android:label="@string/ac_name_image_pager" />
+        <activity
+            android:name=".imageloader.ImageGalleryActivity"
+            android:label="@string/ac_name_image_gallery" />
+        <activity
+            android:name=".clipimage.ClipImageActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="clipimage.ClipImageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".clipimage.ShowImageActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="clipimage.ShowImageActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".clipimage.SystemClipActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="clipimage.SystemClipActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Widget -->
+        <receiver android:name="com.han.myproject.imageloader.widget.UILWidgetProvider" >
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

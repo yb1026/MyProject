@@ -1,4 +1,4 @@
-package com.han.myproject;
+package com.han.myproject.myView;
 
 import java.math.BigDecimal;
 
@@ -16,6 +16,8 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.PathShape;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.han.myproject.R;
 
 /**
  * 仿iphone带进度的进度条，线程安全的View，可直接在线程中更新进度

@@ -1,4 +1,4 @@
-package com.han.myproject;
+package com.han.myproject.myView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,6 +16,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.han.myproject.R;
 
 /**
  * 仿iphone带进度的进度条，线程安全的View，可直接在线程中更新进度
@@ -119,7 +121,6 @@ public class RoundProgressBar extends View {
 		paint.setAntiAlias(true); // 消除锯齿
 		canvas.drawCircle(centre, centre, radius, paint); // 画出圆环
 
-		Log.e("log", centre + "");
 
 		/**
 		 * 画进度百分比
