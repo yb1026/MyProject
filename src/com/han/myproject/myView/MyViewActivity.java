@@ -11,7 +11,7 @@ import com.han.myproject.R;
 public class MyViewActivity extends Activity {
 
 	private RoundProgressBar  roundprogress;
-	private FiveDimensionView  fiveimage;
+	private LifeWheelRadarGraph  fiveimage;
 	
 	
 	
@@ -32,7 +32,7 @@ public class MyViewActivity extends Activity {
         
         roundprogress.setProgress(50);
         
-        fiveimage = (FiveDimensionView)this.findViewById(R.id.fiveimage);
+        fiveimage = (LifeWheelRadarGraph)this.findViewById(R.id.fiveimage);
         fiveimage.setVisibility(View.VISIBLE);
         fiveimage.setOnClickListener(new OnClickListener() {
 			

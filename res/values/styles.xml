@@ -1,13 +1,17 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <style name="AppBaseTheme" parent="android:Theme.NoTitleBar"></style>
 
-    <style name="AppTheme" parent="AppBaseTheme"></style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:fitsSystemWindows">true</item><!-- 适应系统窗口？ -->
+        <item name="android:windowNoTitle">true</item><!-- 隐藏导航 -->
+    </style>
 
     <style name="roundprogress_style">
         <item name="roundWidth">15dip</item>
         <item name="roundTextSize">40sp</item>
-         <item name="textColor">#909090</item>
+        <item name="textColor">#909090</item>
         <item name="processColor1">#3498db</item>
         <item name="processColor2">#05f500</item>
     </style>

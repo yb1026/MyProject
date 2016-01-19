@@ -208,28 +208,20 @@ public class FiveDimensionView extends View {
 		}
 		float imageMargin = paddingScale*this.centre;
 		
-		imageLeft[0] = bx[0] + cos(imageMargin, startAngle - 0 * 360 / 5)
-				- bitmaps[0].getWidth() / 2;
-		imageTop[0] = by[0] - sin(imageMargin, startAngle - 0 * 360 / 5)
-				- bitmaps[0].getHeight()*0.8f;
-
-		imageLeft[1] = bx[1] + cos(imageMargin, startAngle - 1 * 360 / 5) - 0;
-		imageTop[1] = by[1] - sin(imageMargin, startAngle - 1 * 360 / 5)
-				- bitmaps[1].getHeight() / 2;
-
-		imageLeft[2] = bx[2] + cos(imageMargin, startAngle - 2 * 360 / 5) - 0;
-		imageTop[2] = by[2] - sin(imageMargin, startAngle - 2 * 360 / 5)
-				- bitmaps[2].getHeight() / 5;
-
-		imageLeft[3] = bx[3] + cos(imageMargin, startAngle - 3 * 360 / 5)
-				- bitmaps[3].getWidth();
-		imageTop[3] = by[3] - sin(imageMargin, startAngle - 3 * 360 / 5)
-				- bitmaps[3].getHeight() / 5;
-
-		imageLeft[4] = bx[4] + cos(imageMargin, startAngle - 4 * 360 / 5)
-				- bitmaps[4].getWidth();
-		imageTop[4] = by[4] - sin(imageMargin, startAngle - 4 * 360 / 5)
-				- bitmaps[3].getHeight() / 2;
+		for (int i = 0; i < 5; i++) {
+			imageLeft[i] = bx[i] + cos(imageMargin, startAngle -  i* 72);
+			imageTop[i] = by[i] - sin(imageMargin, startAngle - i * 72);
+		}
+		
+		//微调系数，自己调
+		float[] xS = {0.5f,0,0,1,1}; 
+		float[] yS = {0.8f,0.5f,0.2f,0.2f,0.5f}; 
+		
+		for (int i = 0; i < 5; i++) {
+			imageLeft[i] = imageLeft[i]- bitmaps[i].getWidth() * xS[i];
+			imageTop[i] = imageTop[i] - bitmaps[i].getHeight() * yS[i];
+		}
+		
 
 	}
 

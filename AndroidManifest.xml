@@ -30,27 +30,17 @@
             </intent-filter>
         </activity>
 
+        <!-- web -->
+        <activity android:name=".web.MyWebViewActivity" >
+        </activity>
+
         <!-- 自定义 视图 -->
 
-        <activity
-            android:name=".myView.MyViewActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MyViewActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name=".myView.MyViewActivity" >
         </activity>
 
         <!-- imageloader -->
-        <activity
-            android:name=".imageloader.HomeActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.HomeActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name=".imageloader.HomeActivity" >
         </activity>
         <activity
             android:name=".imageloader.ImageListActivity"
@@ -67,29 +57,14 @@
         <activity
             android:name=".clipimage.ClipImageActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="clipimage.ClipImageActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".clipimage.ShowImageActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="clipimage.ShowImageActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".clipimage.SystemClipActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="clipimage.SystemClipActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <!-- Widget -->

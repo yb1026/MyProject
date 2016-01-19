@@ -3,7 +3,14 @@ package com.han.myproject.test;
 
 public class Test {
 	public static void main(String[] args) {
-			System.out.println(find(1232421412));
+		String str = new String("amigoxiexiexingxing");
+        System.out.println("原始：" + str);
+        try {
+			System.out.println("SHA后：" + SHAUtil.shaEncode(str));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

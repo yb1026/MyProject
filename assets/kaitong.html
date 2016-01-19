@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form id="pay_form"
+		action="https://101.231.204.80:5000/gateway/api/frontTransReq.do"
+		method="post">
+		<input type="hidden" name="txnType" id="txnType" value="79" /><input
+			type="hidden" name="frontUrl" id="frontUrl"
+			value="http://172.18.137.63:8080/ACPSample_WuTiaoZhuan_Token/frontRcvResponse" /><input
+			type="hidden" name="channelType" id="channelType" value="07" /><input
+			type="hidden" name="merId" id="merId" value="027430592220003" /><input
+			type="hidden" name="tokenPayData" id="tokenPayData"
+			value="{trId=62000000001&tokenType=01}" /><input type="hidden"
+			name="reserved" id="reserved" value="{cardNumberLock=1}" /><input
+			type="hidden" name="txnSubType" id="txnSubType" value="00" /><input
+			type="hidden" name="version" id="version" value="5.0.0" /><input
+			type="hidden" name="accType" id="accType" value="01" /><input
+			type="hidden" name="accNo" id="accNo" value="6226090000000048" /><input
+			type="hidden" name="signMethod" id="signMethod" value="01" /><input
+			type="hidden" name="backUrl" id="backUrl"
+			value="http://222.222.222.222:8080/ACPSample_WuTiaoZhuan_Token/BackRcvResponse" /><input
+			type="hidden" name="certId" id="certId"
+			value="40220995861346480087409489142384722381" /><input type="hidden"
+			name="encoding" id="encoding" value="UTF-8" /><input type="hidden"
+			name="bizType" id="bizType" value="000902" /><input type="hidden"
+			name="reqReserved" id="reqReserved" value="透传字段" /><input
+			type="hidden" name="signature" id="signature"
+			value="TwiTDPRXSVdmgzpsG5KoS74DvuY3Bmqnq5ZIZKfv7EqJTLDjooqDdEBjeL2tJg5DAFTUyjS/V5K/hBlulvvDt1438i1SIbYsr/d+0qjS8JXG0br8DjrifTwC0tNh10ZN92TOf59eP8chdeYsQO2wHNk4rDQpm+pXE2OaXa2fWtw=" /><input
+			type="hidden" name="orderId" id="orderId" value="20151230172725" /><input
+			type="hidden" name="txnTime" id="txnTime" value="20151230172725" /><input
+			type="hidden" name="accessType" id="accessType" value="0" />
+	</form>
+</body>
+<script type="text/javascript">
+	document.all.pay_form.submit();
+</script>
+</html>
