@@ -104,7 +104,8 @@ containing a value of this type.
         public static final int ic_stub=0x7f02000a;
         public static final int image1=0x7f02000b;
         public static final int tbug=0x7f02000c;
-        public static final int xx=0x7f02000d;
+        public static final int test=0x7f02000d;
+        public static final int xx=0x7f02000e;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0015;

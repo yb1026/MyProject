@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
 	
 	private Button fullscreen;
 	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
