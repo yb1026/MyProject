@@ -108,32 +108,33 @@ containing a value of this type.
         public static final int xx=0x7f02000e;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0015;
-        public static final int btn=0x7f0a0006;
-        public static final int cemera=0x7f0a0009;
-        public static final int fiveimage=0x7f0a0008;
+        public static final int action_settings=0x7f0a0016;
+        public static final int btn=0x7f0a0007;
+        public static final int cemera=0x7f0a000a;
+        public static final int fiveimage=0x7f0a0009;
         public static final int fullscreen=0x7f0a0004;
-        public static final int gallery=0x7f0a000b;
-        public static final int gridview=0x7f0a000c;
-        public static final int id_action_clip=0x7f0a0016;
-        public static final int id_clipImageLayout=0x7f0a0005;
-        public static final int id_showImage=0x7f0a0011;
-        public static final int image=0x7f0a000e;
-        public static final int image_left=0x7f0a0012;
-        public static final int image_right=0x7f0a0013;
+        public static final int gallery=0x7f0a000c;
+        public static final int gridview=0x7f0a000d;
+        public static final int id_action_clip=0x7f0a0017;
+        public static final int id_clipImageLayout=0x7f0a0006;
+        public static final int id_showImage=0x7f0a0012;
+        public static final int image=0x7f0a000f;
+        public static final int image_left=0x7f0a0013;
+        public static final int image_right=0x7f0a0014;
         public static final int imageloader=0x7f0a0001;
-        public static final int item_clear_disc_cache=0x7f0a0018;
-        public static final int item_clear_memory_cache=0x7f0a0017;
-        public static final int item_pause_on_fling=0x7f0a001a;
-        public static final int item_pause_on_scroll=0x7f0a0019;
-        public static final int loading=0x7f0a0010;
+        public static final int item_clear_disc_cache=0x7f0a0019;
+        public static final int item_clear_memory_cache=0x7f0a0018;
+        public static final int item_pause_on_fling=0x7f0a001b;
+        public static final int item_pause_on_scroll=0x7f0a001a;
+        public static final int loading=0x7f0a0011;
+        public static final int mpos=0x7f0a0005;
         public static final int myview=0x7f0a0000;
-        public static final int pager=0x7f0a000d;
-        public static final int picture=0x7f0a000a;
-        public static final int roundprogress=0x7f0a0007;
+        public static final int pager=0x7f0a000e;
+        public static final int picture=0x7f0a000b;
+        public static final int roundprogress=0x7f0a0008;
         public static final int show=0x7f0a0002;
-        public static final int text=0x7f0a000f;
-        public static final int webview=0x7f0a0014;
+        public static final int text=0x7f0a0010;
+        public static final int webview=0x7f0a0015;
         public static final int webviewbtn=0x7f0a0003;
     }
     public static final class layout {

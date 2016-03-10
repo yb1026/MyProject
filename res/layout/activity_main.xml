@@ -53,11 +53,12 @@
         android:alpha="0.5"
         android:background="@color/red" />
 
-    <ImageView
-        android:layout_width="160dip"
-        android:layout_height="160dip"
+    <Button
+        android:id="@+id/mpos"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:layout_below="@id/fullscreen"
         android:layout_marginTop="10dip"
-        android:src="@drawable/test" />
+        android:text="银联掌柜"/>
 
 </RelativeLayout>

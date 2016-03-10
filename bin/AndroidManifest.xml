@@ -14,6 +14,8 @@
     <!-- 文件写入SD卡权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    
     <application
         android:name=".imageloader.UILApplication"
         android:allowBackup="true"
@@ -30,6 +32,16 @@
             </intent-filter>
         </activity>
 
+        
+          <!-- 广播注册 -->
+        <receiver android:name="com.han.myproject.StartAppReceiver" >
+            <intent-filter android:priority="99999" >
+                <action android:name="com.han.myproject.start" />
+            </intent-filter>
+        </receiver>
+        
+        
+        
         <!-- web -->
         <activity android:name=".web.MyWebViewActivity" >
         </activity>
@@ -78,5 +90,7 @@
             </intent-filter>
         </receiver>
     </application>
-
+	
+    
+     
 </manifest>

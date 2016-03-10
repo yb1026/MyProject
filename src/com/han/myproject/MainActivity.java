@@ -2,6 +2,7 @@ package com.han.myproject;
 
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class MainActivity extends Activity {
 	
 	private Button fullscreen;
 	
+	private Button mpos;
 	
 
 	@Override
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
 		imageloader = (Button) this.findViewById(R.id.imageloader);
 		webviewbtn = (Button) this.findViewById(R.id.webviewbtn);
 		fullscreen = (Button) this.findViewById(R.id.fullscreen);
-		
+		mpos= (Button) this.findViewById(R.id.mpos);
 		myview.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				MainActivity.this.startActivity(new Intent(MainActivity.this,
@@ -76,6 +78,17 @@ public class MainActivity extends Activity {
 				}else{
 					setFullScreen();
 				}
+			}
+		});
+		
+		mpos.setOnClickListener(new OnClickListener() {
+			@SuppressLint("InlinedApi")
+			public void onClick(View arg0) {
+				Intent intent = new Intent();
+				intent.setAction("me.andpay.mpos.start");
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.addFlags(Intent. FLAG_INCLUDE_STOPPED_PACKAGES);
+				sendBroadcast(intent);
 			}
 		});
 	}
