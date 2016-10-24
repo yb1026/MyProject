@@ -58,9 +58,9 @@ public class ImageListActivity extends AbsListViewBaseActivity {
 
 		// 使用DisplayImageOptions.Builder()创建DisplayImageOptions
 		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.ic_stub)			// 设置图片下载期间显示的图片
-			.showImageForEmptyUri(R.drawable.ic_empty)	// 设置图片Uri为空或是错误的时候显示的图片
-			.showImageOnFail(R.drawable.ic_error)		// 设置图片加载或解码过程中发生错误显示的图片	
+			.showStubImage(R.mipmap.ic_stub)			// 设置图片下载期间显示的图片
+			.showImageForEmptyUri(R.mipmap.ic_empty)	// 设置图片Uri为空或是错误的时候显示的图片
+			.showImageOnFail(R.mipmap.ic_error)		// 设置图片加载或解码过程中发生错误显示的图片
 			.cacheInMemory()						// 设置下载的图片是否缓存在内存中
 			.cacheOnDisc()							// 设置下载的图片是否缓存在SD卡中
 			.displayer(new RoundedBitmapDisplayer(20))	// 设置成圆角图片

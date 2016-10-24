@@ -62,8 +62,8 @@ public class ImagePagerActivity extends BaseActivity {
 		}
 
 		options = new DisplayImageOptions.Builder()
-			.showImageForEmptyUri(R.drawable.ic_empty)
-			.showImageOnFail(R.drawable.ic_error)
+			.showImageForEmptyUri(R.mipmap.ic_empty)
+			.showImageOnFail(R.mipmap.ic_error)
 			.resetViewBeforeLoading()
 			.cacheOnDisc()
 			.imageScaleType(ImageScaleType.EXACTLY)

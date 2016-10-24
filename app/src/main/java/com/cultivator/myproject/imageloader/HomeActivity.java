@@ -128,11 +128,11 @@ public class HomeActivity extends BaseActivity {
 		
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
 			// 设置图片在下载期间显示的图片
-			.showStubImage(R.drawable.ic_launcher)//
+			.showStubImage(R.mipmap.ic_launcher)//
 			// 设置图片Uri为空或是错误的时候显示的图片
-			.showImageForEmptyUri(R.drawable.ic_launcher)//
+			.showImageForEmptyUri(R.mipmap.ic_launcher)//
 			// 设置图片加载/解码过程中错误时候显示的图片
-			.showImageOnFail(R.drawable.ic_launcher)//
+			.showImageOnFail(R.mipmap.ic_launcher)//
 			// 设置图片在下载前是否重置，复位
 			.resetViewBeforeLoading()//
 			// 设置下载的图片是否缓存在内存中

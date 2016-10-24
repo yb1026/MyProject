@@ -171,7 +171,7 @@ public class LifeWheelRadarGraph extends View {
 		this.centre = getWidth()>getHeight()? getHeight()/2:getWidth()/2;
 
 		canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.fiveimage1), 0f, 0f, paint);
+				R.mipmap.fiveimage1), 0f, 0f, paint);
 
 		paint.setAntiAlias(true);
 		// 画边框线
@@ -380,9 +380,9 @@ public class LifeWheelRadarGraph extends View {
 	private final float[] imageLeft = new float[5];
 	private final float[] imageTop = new float[5];
 
-	private final int[] drawableIds = new int[] { R.drawable.fiveimage1,
-			R.drawable.fiveimage2, R.drawable.fiveimage3,
-			R.drawable.fiveimage4, R.drawable.fiveimage5 };
+	private final int[] drawableIds = new int[] { R.mipmap.fiveimage1,
+			R.mipmap.fiveimage2, R.mipmap.fiveimage3,
+			R.mipmap.fiveimage4, R.mipmap.fiveimage5 };
 	
 	private final Bitmap[] bitmaps = new Bitmap[5];
 	

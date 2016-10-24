@@ -1,94 +1,143 @@
 package com.cultivator.myproject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cultivator.myproject.imageloader.HomeActivity;
+import com.cultivator.myproject.common.base.BaseActivity;
+import com.cultivator.myproject.common.log.MyLog;
+import com.cultivator.myproject.common.net.model.BaseResp;
+import com.cultivator.myproject.common.view.drage.DragCallback;
+import com.cultivator.myproject.common.view.drage.DragGridView;
+import com.cultivator.myproject.common.view.drage.DragGridViewAdapter;
+import com.cultivator.myproject.common.view.drage.HomeGridItem;
+import com.cultivator.myproject.mclipimage.ClipImageActivity;
 import com.cultivator.myproject.myView.MyViewActivity;
+import com.cultivator.myproject.common.util.sys.RingerUtil;
+import com.cultivator.myproject.common.util.sys.VibratorUtil;
 import com.cultivator.myproject.web.MyWebViewActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
-	private Button myview;
 
-	private Button imageloader;
 
-	private TextView show;
+	private DragGridView mDragGridView;
+	private DragGridViewAdapter mAdapter;
+	private List<HomeGridItem> list = new ArrayList<>();
 
-	private Button webviewbtn;
-	
-	private Button fullscreen;
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		myview = (Button) this.findViewById(R.id.myview);
-		imageloader = (Button) this.findViewById(R.id.imageloader);
-		webviewbtn = (Button) this.findViewById(R.id.webviewbtn);
-		fullscreen = (Button) this.findViewById(R.id.fullscreen);
-		
-		myview.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				MainActivity.this.startActivity(new Intent(MainActivity.this,
-						MyViewActivity.class));
-			}
-		});
-		imageloader.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				MainActivity.this.startActivity(new Intent(MainActivity.this,
-						HomeActivity.class));
-			}
-		});
-
-		show = (TextView) this.findViewById(R.id.show);
-
-		show.setText(new Date().toString());
-
-		webviewbtn.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				MainActivity.this.startActivity(new Intent(MainActivity.this,
-						MyWebViewActivity.class));
-			}
-		});
-
-		imageloader.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				MainActivity.this.startActivity(new Intent(MainActivity.this,
-						HomeActivity.class));
-			}
-		});
-		
-		fullscreen.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				if(iffull){
-					quitFullScreen();
-				}else{
-					setFullScreen();
-				}
-			}
-		});
+		initView();
 	}
 
+
+	public void initView() {
+		getToolBar().setTitle("我的应用");
+		mDragGridView = (DragGridView) findViewById(R.id.home_grideview);
+		initDragGrid();
+	}
+
+	public void initDragGrid() {
+		initData();
+		MyLog.d(getClass(), "initDragGrid...：" + list.size());
+		if (mAdapter == null) {
+			mAdapter = new DragGridViewAdapter(this);
+			mAdapter.setlist(list);
+			mDragGridView.setAdapter(mAdapter);
+			mDragGridView.setDragCallback(new DragCallback() {
+				@Override
+				public void startDrag(int position) {
+					Log.i("liuy", "start drag at " + position);
+				}
+
+				@Override
+				public void endDrag(int position) {
+					Log.i("liuy", "end drag at " + position);
+				}
+			});
+			mDragGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					HomeGridItem item = list.get(position);
+					if (item.getMipmapId() != 0) {
+						startActivity(item.getClass());
+						mDragGridView.clicked(position);
+					}
+				}
+			});
+			mDragGridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+					HomeGridItem item = list.get(position);
+					if (item.getMipmapId() != 0) {
+						mDragGridView.startDrag(position);
+					}
+					return false;
+				}
+			});
+		} else {
+			mAdapter.notifyDataSetChanged();
+		}
+	}
+
+
+	private void initData(){
+
+		String[] names = {"自定义组建",
+				"裁切图片",
+				"音屏震动",
+				"全屏切换",
+				"webview",
+				"httpimages"};
+		Class[] classes = {MyViewActivity.class,
+				ClipImageActivity.class,
+				VibratorRingActivity.class,
+				FullscreenActivity.class,
+				MyWebViewActivity.class};
+
+		for (int i = 0; i < names.length; i++) {
+			HomeGridItem item = new HomeGridItem();
+			item.setMipmapId(R.mipmap.ic_launcher);
+			item.setName(names[i]);
+			list.add(item);
+		}
+
+		HomeGridItem item = new HomeGridItem();
+		for (int i = 0; i < list.size() % 4; i++) {
+			list.add(item);
+		}
+	}
+
+
+
+
 	private boolean iffull = false;
-	
+
 	private void setFullScreen() {
+
 		iffull= true;
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	}
 
+	}
 	private void quitFullScreen() {
+
 		iffull= false;
 		final WindowManager.LayoutParams attrs = getWindow().getAttributes();
 		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -96,5 +145,6 @@ public class MainActivity extends Activity {
 		getWindow()
 				.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 	}
+
 
 }

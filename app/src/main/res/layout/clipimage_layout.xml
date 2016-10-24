@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#aaaaaa"   >
 
-    <com.han.myproject.clipimage.view.ClipImageLayout
+    <com.cultivator.myproject.mclipimage.view.ClipImageLayout
         android:id="@+id/id_clipImageLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />

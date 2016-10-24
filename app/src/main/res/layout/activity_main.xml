@@ -7,57 +7,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <Button
-        android:id="@+id/myview"
+    <com.cultivator.myproject.common.view.drage.DragGridView
+        android:id="@+id/home_grideview"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="自定义组件" />
-
-    <Button
-        android:id="@+id/imageloader"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/myview"
-        android:layout_marginTop="20dip"
-        android:text="imageloaderDemo" />
-
-    <TextView
-        android:id="@+id/show"
-        android:layout_width="match_parent"
-        android:layout_height="30dip"
-        android:layout_below="@id/imageloader"
-        android:layout_marginTop="20dip" />
-
-    <Button
-        android:id="@+id/webviewbtn"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/show"
-        android:layout_marginTop="10dip"
-        android:text="webview" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/webviewbtn"
-        android:layout_marginTop="10dip"
-        android:gravity="center"
-        android:text="全屏切换" />
-
-    <Button
-        android:id="@+id/fullscreen"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/webviewbtn"
-        android:layout_marginTop="10dip"
-        android:alpha="0.5"
-        android:background="@color/red" />
-
-    <ImageView
-        android:layout_width="160dip"
-        android:layout_height="160dip"
-        android:layout_below="@id/fullscreen"
-        android:layout_marginTop="10dip"
-        android:src="@drawable/test" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:cacheColorHint="@null"
+        android:horizontalSpacing="0.0dip"
+        android:listSelector="@null"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="0.0dip"/>
 
 </RelativeLayout>

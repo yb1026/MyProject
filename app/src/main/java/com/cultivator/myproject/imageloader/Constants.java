@@ -96,7 +96,7 @@ public final class Constants {
 			"http://cdn.urbanislandz.com/wp-content/uploads/2011/10/MMSposter-large.jpg", // very large image
 			"file:///sdcard/Universal Image Loader @#&=+-_.,!()~'%20.png", // Image from SD card with encoded symbols
 			"assets://Living Things @#&=+-_.,!()~'%20.jpg", // Image from assets
-			"drawable://" + R.drawable.ic_launcher, // Image from drawables
+			"drawable://" + R.mipmap.ic_launcher, // Image from drawables
 			"http://upload.wikimedia.org/wikipedia/ru/b/b6/袣邪泻_泻芯褌_褋_屑褘褕邪屑懈_胁芯械胁邪谢.png", // Link with UTF-8
 			"https://www.eff.org/sites/default/files/chrome150_0.jpg", // Image from HTTPS
 			"http://bit.ly/soBiXr", // Redirect link

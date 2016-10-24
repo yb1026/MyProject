@@ -53,9 +53,9 @@ public class FiveDimensionView extends View {
 	private final float[] imageLeft = new float[5];
 	private final float[] imageTop = new float[5];
 
-	private final int[] drawableIds = new int[] { R.drawable.fiveimage1,
-			R.drawable.fiveimage2, R.drawable.fiveimage3,
-			R.drawable.fiveimage4, R.drawable.fiveimage5 };
+	private final int[] drawableIds = new int[] { R.mipmap.fiveimage1,
+			R.mipmap.fiveimage2, R.mipmap.fiveimage3,
+			R.mipmap.fiveimage4, R.mipmap.fiveimage5 };
 
 	private final Bitmap[] bitmaps = new Bitmap[5];
 

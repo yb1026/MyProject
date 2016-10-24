@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    CoordinatorLayout是这次新添加的一个增强型的FrameLayout，通过它可以实现很多东西：
+        例如：
+            1.界面向上滚动逐渐隐藏Toolbar；
+            2.在其中可以放置浮动的View，就像Floating Action Button。
+-->
+<com.cultivator.myproject.common.base.BaseView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_f8f8f8"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    app:visibility_bar="true">
+
+    <!--<android.support.design.widget.AppBarLayout-->
+    <!--android:id="@+id/mAppBarLayout"-->
+    <!--android:background="@color/color_bg_bar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <!--&lt;!&ndash; popupTheme 弹出的菜单的样式 &ndash;&gt;-->
+    <!--&lt;!&ndash; layout_scrollFlags: 所有想滚动出屏幕的view都需要设置这个flag- 没有设置这个flag的view将被固定在屏幕顶部。-->
+    <!--enterAlways: 这个flag让任意向下的滚动都会导致该view变为可见，启用快速“返回模式”。-->
+    <!--enterAlwaysCollapsed: 当你的视图已经设置minHeight属性又使用此标志时，你的视图只能以最小高度进入，-->
+    <!--只有当滚动视图到达顶部时才扩大到完整高度。-->
+    <!--exitUntilCollapsed: 当视图会在滚动时，它一直滚动到设置的minHeight时完全隐藏。&ndash;&gt;-->
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--app:contentInsetEnd="0dp"-->
+    <!--app:contentInsetLeft="0dp"-->
+    <!--app:contentInsetRight="0dp"-->
+    <!--app:contentInsetStart="0dp"-->
+    <!--android:fitsSystemWindows="false"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--app:layout_scrollFlags="scroll|enterAlways"-->
+    <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+    <!--app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/data_view"-->
+    <!--android:background="@color/red"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"/>-->
+</com.cultivator.myproject.common.base.BaseView>
