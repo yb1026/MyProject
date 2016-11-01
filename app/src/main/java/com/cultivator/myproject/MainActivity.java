@@ -1,33 +1,23 @@
 package com.cultivator.myproject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.cultivator.myproject.common.base.BaseActivity;
 import com.cultivator.myproject.common.log.MyLog;
-import com.cultivator.myproject.common.net.model.BaseResp;
 import com.cultivator.myproject.common.view.drage.DragCallback;
 import com.cultivator.myproject.common.view.drage.DragGridView;
 import com.cultivator.myproject.common.view.drage.DragGridViewAdapter;
 import com.cultivator.myproject.common.view.drage.HomeGridItem;
 import com.cultivator.myproject.mclipimage.ClipImageActivity;
 import com.cultivator.myproject.myView.MyViewActivity;
-import com.cultivator.myproject.common.util.sys.RingerUtil;
-import com.cultivator.myproject.common.util.sys.VibratorUtil;
-import com.cultivator.myproject.web.MyWebViewActivity;
+import com.cultivator.myproject.web.CommonWebActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -109,7 +99,7 @@ public class MainActivity extends BaseActivity {
 				ClipImageActivity.class,
 				VibratorRingActivity.class,
 				FullscreenActivity.class,
-				MyWebViewActivity.class};
+				CommonWebActivity.class};
 
 		for (int i = 0; i < names.length; i++) {
 			HomeGridItem item = new HomeGridItem();
@@ -127,24 +117,6 @@ public class MainActivity extends BaseActivity {
 
 
 
-	private boolean iffull = false;
-
-	private void setFullScreen() {
-
-		iffull= true;
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-	}
-	private void quitFullScreen() {
-
-		iffull= false;
-		final WindowManager.LayoutParams attrs = getWindow().getAttributes();
-		attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().setAttributes(attrs);
-		getWindow()
-				.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-	}
 
 
 }

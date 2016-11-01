@@ -33,7 +33,6 @@
         <activity android:name=".FullscreenActivity" ></activity>
 
         <!-- web -->
-        <activity android:name=".web.MyWebViewActivity" ></activity>
         <!-- 自定义 视图 -->
         <activity android:name=".myView.MyViewActivity" ></activity>
 
@@ -45,20 +44,7 @@
 
 
         <!-- imageloader -->
-        <activity android:name=".imageloader.HomeActivity" >
-        </activity>
-        <activity
-            android:name=".imageloader.ImageListActivity"
-            android:label="@string/ac_name_image_list" />
-        <activity
-            android:name=".imageloader.ImageGridActivity"
-            android:label="@string/ac_name_image_grid" />
-        <activity
-            android:name=".imageloader.ImagePagerActivity"
-            android:label="@string/ac_name_image_pager" />
-        <activity
-            android:name=".imageloader.ImageGalleryActivity"
-            android:label="@string/ac_name_image_gallery" />
+
         <activity
             android:name=".mclipimage.ClipImageActivity"
             android:label="@string/app_name" >
@@ -72,16 +58,7 @@
             android:label="@string/app_name" >
         </activity>
 
-        <!-- Widget -->
-        <receiver android:name="com.cultivator.myproject.imageloader.widget.UILWidgetProvider" >
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_provider" />
 
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-        </receiver>
 
 
 

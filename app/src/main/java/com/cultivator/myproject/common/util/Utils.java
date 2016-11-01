@@ -1,9 +1,12 @@
 package com.cultivator.myproject.common.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.EditText;
+
+import com.cultivator.myproject.common.log.MyLog;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -22,6 +25,21 @@ import java.util.regex.Pattern;
  * 
  */
 public final class Utils {
+
+	/**
+	 * 分享
+	 * @param mContext
+	 * @param activityTitle
+	 * @param msgText
+	 */
+	public static void shareMsg(Context mContext,String activityTitle, String msgText) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("text/plain");
+		intent.putExtra(Intent.EXTRA_TEXT, msgText);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		MyLog.e(mContext.getClass(), "share:" + msgText);
+		mContext.startActivity(Intent.createChooser(intent, activityTitle));
+	}
 
 	/**
 	 * 获取屏幕分辨率

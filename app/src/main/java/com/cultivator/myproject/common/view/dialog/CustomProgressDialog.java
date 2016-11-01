@@ -32,7 +32,7 @@ public class CustomProgressDialog extends Dialog {
         customProgressDialog = new CustomProgressDialog(context, R.style.SimpleDialog);
         customProgressDialog.setCancelable(false);
         customProgressDialog.setCanceledOnTouchOutside(false);
-        View v = LayoutInflater.from(context).inflate(R.layout.layout_progress_dialog, null);
+        View v = LayoutInflater.from(context).inflate(R.layout.dialog_progress, null);
         customProgressDialog.setContentView(v);
         clp = (ContentLoadingProgressBar)v.findViewById(R.id.progress);
         customProgressDialog.getWindow().getAttributes().gravity = Gravity.CENTER;

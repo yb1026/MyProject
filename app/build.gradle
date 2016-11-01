@@ -45,9 +45,9 @@ dependencies {
 
     compile project(':zxing')
 
-    compile files('libs/universal-image-loader-1.8.4.jar')
     compile files('libs/gson-2.2.1.jar')
     compile files('libs/nohttp1.0.0.jar')
+    compile files('libs/library-2.4.0.jar')
 
     //开源库
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.4'

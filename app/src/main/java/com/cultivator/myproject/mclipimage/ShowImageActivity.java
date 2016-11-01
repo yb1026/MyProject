@@ -22,9 +22,9 @@ public class ShowImageActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.uil_show);
+		setContentView(R.layout.activity_showimage);
 
-		mImageView = (ImageView) findViewById(R.id.id_showImage);
+		mImageView = (ImageView) findViewById(R.id.id_showimage);
 		byte[] b = getIntent().getByteArrayExtra("bitmap");
 		Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
 		if (bitmap != null)

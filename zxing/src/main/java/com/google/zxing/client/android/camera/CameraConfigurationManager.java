@@ -97,32 +97,32 @@ final class CameraConfigurationManager {
 
 	private static Point getCameraResolution(Camera.Parameters parameters,
 			Point screenResolution) {
-		// String previewSizeValueString =
-		// parameters.get("preview-size-values");
-		// // saw this on Xperia
-		// if (previewSizeValueString == null) {
-		// previewSizeValueString = parameters.get("preview-size-value");
-		// }
-		//
+		String previewSizeValueString =
+				parameters.get("preview-size-values");
+		// saw this on Xperia
+		if (previewSizeValueString == null) {
+			previewSizeValueString = parameters.get("preview-size-value");
+		}
 
-		List<Size> sizes = parameters.getSupportedPreviewSizes();
-		Size bestSize = getBestPreviewSize(screenResolution.x,
-				screenResolution.y, sizes);
+		Point cameraResolution = null;
 
-		Point cameraResolution = new Point(bestSize.width, bestSize.height);
-		// if (previewSizeValueString != null) {
-		// Log.d(TAG, "preview-size-values parameter: "
-		// + previewSizeValueString);
-		// cameraResolution = findBestPreviewSizeValue(previewSizeValueString,
-		// screenResolution);
-		// }
-		//
-		// if (cameraResolution == null) {
-		// // Ensure that the camera resolution is a multiple of 8, as the
-		// // screen may not be.
-		// cameraResolution = new Point((screenResolution.x >> 3) << 3,
-		// (screenResolution.y >> 3) << 3);
-		// }
+		if (previewSizeValueString != null) {
+			Log.d(TAG, "preview-size-values parameter: "
+					+ previewSizeValueString);
+			cameraResolution = findBestPreviewSizeValue(previewSizeValueString,
+					screenResolution);
+		}
+
+		if (cameraResolution == null) {
+			// Ensure that the camera resolution is a multiple of 8, as the
+			// screen may not be.
+			List<Size> sizes = parameters.getSupportedPreviewSizes();
+			Size bestSize = getBestPreviewSize(screenResolution.x,
+					screenResolution.y, sizes);
+
+			cameraResolution = new Point(bestSize.width, bestSize.height);
+			return cameraResolution;
+		}
 
 		return cameraResolution;
 	}

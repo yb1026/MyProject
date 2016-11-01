@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.zxing.client.android.QRActivity;
@@ -184,5 +185,32 @@ public class FullscreenActivity extends AppCompatActivity {
             Toast.makeText(this,result,Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+
+
+
+
+
+
+
+    private boolean iffull = false;
+
+    private void setFullScreen() {
+
+        iffull= true;
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+    }
+    private void quitFullScreen() {
+
+        iffull= false;
+        final WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setAttributes(attrs);
+        getWindow()
+                .clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }

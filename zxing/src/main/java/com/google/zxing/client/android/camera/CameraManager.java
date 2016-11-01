@@ -46,9 +46,7 @@ public class CameraManager {
 	private static final String TAG = CameraManager.class.getSimpleName();
 
 	private static final int MIN_FRAME_WIDTH = 240;
-	private static final int MIN_FRAME_HEIGHT = 240;
-	private static final int MAX_FRAME_WIDTH = 480;
-	private static final int MAX_FRAME_HEIGHT = 320;
+	private static final int MAX_FRAME_WIDTH = 1200;
 
 	private static CameraManager cameraManager;
 
@@ -242,7 +240,7 @@ public class CameraManager {
 	 * 
 	 * @return The rectangle to draw on screen in window coordinates.
 	 */
-	public Rect getFramingRect() {
+	public synchronized  Rect getFramingRect() {
 		if (framingRect == null) {
 			if (camera == null) {
 				return null;
@@ -251,18 +249,20 @@ public class CameraManager {
 			Point screenResolution = configManager.getScreenResolution();
 
 			int width = screenResolution.x * 3 / 4;
+
+
 			if (width < MIN_FRAME_WIDTH) {
 				width = MIN_FRAME_WIDTH;
 			}
 
 			// 大屏手机上480的扫描框太小
-			// else if (width > MAX_FRAME_WIDTH) {
-			// width = MAX_FRAME_WIDTH;
-			// }
+			else if (width > MAX_FRAME_WIDTH) {
+				width = MAX_FRAME_WIDTH;
+			}
 
 			int height = width;
 			int leftOffset = (screenResolution.x - width) / 2;
-			int topOffset = (screenResolution.y - height) / 2;
+			int topOffset = (screenResolution.y - height) / 4;
 			framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
 					topOffset + height);
 

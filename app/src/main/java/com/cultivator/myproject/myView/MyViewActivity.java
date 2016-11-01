@@ -19,7 +19,7 @@ public class MyViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myview_layout);
+        setContentView(R.layout.activity_myview);
         btn = (Button)this.findViewById(R.id.btn);
         
         btn.setOnClickListener(new OnClickListener() {

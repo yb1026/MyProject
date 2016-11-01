@@ -16,16 +16,22 @@
 
 package com.google.zxing.client.android;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.animation.Animation;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
@@ -47,6 +53,7 @@ public final class ViewfinderView extends View {
     private static final int MAX_RESULT_POINTS = 20;
 
     private final Paint paint;
+    private Paint animaPaint;
     private Bitmap resultBitmap;
     private final int maskColor;
     private final int resultColor;
@@ -56,6 +63,8 @@ public final class ViewfinderView extends View {
     private int scannerAlpha;
     private List<ResultPoint> possibleResultPoints;
     private List<ResultPoint> lastPossibleResultPoints;
+    private float currentY;
+    private ValueAnimator anim;
 
     // This constructor is used when the class is built from an XML resource.
     public ViewfinderView(Context context, AttributeSet attrs) {
@@ -102,6 +111,66 @@ public final class ViewfinderView extends View {
         dst.right = frame.right;
         canvas.drawBitmap(bitmap, null, dst, paint);
 
+
+        if (animaPaint == null) {
+            animaPaint = new Paint();
+            LinearGradient lg = new LinearGradient(80, 0, 100, 100, Color.WHITE, Color.GREEN, Shader.TileMode.REPEAT);
+            animaPaint.setShader(lg);
+            animaPaint.setColor(Color.GREEN);
+            animaPaint.setAlpha(80);
+        }
+
+        if (currentY == 0) {
+            currentY = frame.top;
+        }
+
+        canvas.drawRect(frame.left+100, currentY, frame.right-100, currentY + 8, animaPaint);
+
+
+        startAnimator();
+
+    }
+
+    private void initAnim(Rect frame) {
+        if (anim != null) {
+            return;
+        }
+        anim = ValueAnimator.ofInt(frame.top, frame.bottom-10);
+        anim.setDuration(3000);
+        anim.setRepeatCount(Animation.RESTART);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                currentY = (int) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        anim.addListener(new Animator.AnimatorListener() {
+            public void onAnimationStart(Animator animation) {
+            }
+
+            public void onAnimationEnd(Animator animation) {
+            }
+
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            public void onAnimationRepeat(Animator animation) {
+            }
+        });
+    }
+
+    private void startAnimator() {
+        if (anim != null) {
+            if (!anim.isStarted()) {
+                anim.start();
+            }
+        }
+    }
+
+    public void endAnimator() {
+        if (anim != null) {
+            anim.end();
+        }
     }
 
     public void drawViewfinder() {
