@@ -4,13 +4,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="jquery.js"></script>
-<script>
-	function onloads() {
-		alert("哈哈");
-	}
+	<!--<script type="text/javascript" src="bridge.js"></script>-->
+<script type="text/javascript">
 
-	function toclient() {
-		window.JavaScriptInterface.afterJavaScript("2");
+
+	$(function(){
+		console.log("load html script");
+
+		$("#sub").click(function(){
+			share();
+		});
+
+	});
+
+	function share() {
+		console.log("share click");
+		console.log(bridge.bridge);
+
+
+		var value = $("#val").val();
+
+		var promise = bridge.bridge.sendInvitation(value);
+
+		if(promise){
+			promise.then(
+				function(data){
+					console.log("share callback   "+ data.ret);
+					$("#fromclient").val(data.ret);
+				},
+				function (error){
+					console.log("share callback  "+ data.ret);
+					$("#fromclient").val(error);
+				}
+			);
+		}
 	}
 </script>
 </head>
@@ -18,8 +45,9 @@
 	这是一个html页面
 	<br /> 输入一个字符串：
 	<br />
-	<input id="val" />
-	<input type="submit" value="点击提交给客户端" onclick="toclient();" />
+	<input id="val" value="222aa"/><br />
+	<br />
+	<input type="submit" id="sub"value="点击提交给客户端"  />
 	<br /> 显示返回：
 	<label id="fromclient"></label>
 </body>

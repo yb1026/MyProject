@@ -33,6 +33,9 @@
         <activity android:name=".FullscreenActivity" ></activity>
 
         <!-- web -->
+        <activity android:name=".web.CommonWebActivity" ></activity>
+
+
         <!-- 自定义 视图 -->
         <activity android:name=".myView.MyViewActivity" ></activity>
 

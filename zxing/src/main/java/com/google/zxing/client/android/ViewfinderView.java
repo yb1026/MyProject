@@ -127,7 +127,7 @@ public final class ViewfinderView extends View {
         canvas.drawRect(frame.left+100, currentY, frame.right-100, currentY + 8, animaPaint);
 
 
-        startAnimator();
+        startAnimator(frame);
 
     }
 
@@ -159,11 +159,13 @@ public final class ViewfinderView extends View {
         });
     }
 
-    private void startAnimator() {
-        if (anim != null) {
-            if (!anim.isStarted()) {
-                anim.start();
-            }
+    private void startAnimator(Rect frame) {
+        if (anim == null) {
+            initAnim(frame);
+        }
+
+        if (!anim.isStarted()) {
+            anim.start();
         }
     }
 

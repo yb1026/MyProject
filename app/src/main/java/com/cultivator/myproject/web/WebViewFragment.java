@@ -48,6 +48,11 @@ public class WebViewFragment extends BaseFragment {
                     onShowLeftView();
                 }
             }
+
+            @Override
+            public void onfinish(WebView view) {
+
+            }
         });
     }
 

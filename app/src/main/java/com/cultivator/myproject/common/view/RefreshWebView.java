@@ -15,8 +15,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.cultivator.myproject.R;
+import com.cultivator.myproject.common.log.MyLog;
 import com.cultivator.myproject.common.util.ToastUtil;
-import com.cultivator.myproject.web.JavaScriptInterface;
 
 
 /**
@@ -63,8 +63,9 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
     private void initWebView() {
         initListeners();
         webView.requestFocus();
+        //webView.setWebContentsDebuggingEnabled(true);
         initWebViewSettings();
-        webView.addJavascriptInterface(new JavaScriptInterface(mContext), "JavaScriptInterface");
+        //webView.addJavascriptInterface(new JavaScriptInterface(mContext), "JavaScriptInterface");
         initWebViewClient();
         initWebChromeClient();
     }
@@ -137,8 +138,11 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
             @Override
             public void onPageFinished(WebView webView, String url) {
                 super.onPageFinished(webView, url);
+                if (loadListener != null) {
+                    loadListener.onfinish(webView);
+                }
+
                 // 页面加载完成后调用onloads
-                webView.loadUrl("javascript:onloads();");
             }
 
             @Override
@@ -172,6 +176,7 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
             @Override
             public boolean onConsoleMessage(ConsoleMessage cm) {
                 // 控制台信息
+                MyLog.e("ConsoleMessage:"  +  cm.messageLevel()+"  "+cm.message()+"  "+cm.lineNumber());
                 return true;
             }
 
@@ -200,6 +205,7 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
 
     public static interface LoadListener {
         void onload(WebView view, String url);
+        void onfinish(WebView view);
     }
 
 }

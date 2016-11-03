@@ -3,6 +3,7 @@ package com.cultivator.myproject;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity {
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					HomeGridItem item = list.get(position);
 					if (item.getMipmapId() != 0) {
-						startActivity(item.getClass());
+						startActivity(item.getActivity());
 						mDragGridView.clicked(position);
 					}
 				}
@@ -93,18 +94,23 @@ public class MainActivity extends BaseActivity {
 				"裁切图片",
 				"音屏震动",
 				"全屏切换",
-				"webview",
-				"httpimages"};
-		Class[] classes = {MyViewActivity.class,
-				ClipImageActivity.class,
-				VibratorRingActivity.class,
-				FullscreenActivity.class,
-				CommonWebActivity.class};
+				"webview"};
+
+		ArrayList<Class> classes = new ArrayList<>();
+
+		classes.add(MyViewActivity.class);
+		classes.add(ClipImageActivity.class);
+		classes.add(VibratorRingActivity.class);
+		classes.add(FullscreenActivity.class);
+		classes.add(CommonWebActivity.class);
+		classes.add(CommonWebActivity.class);
+
 
 		for (int i = 0; i < names.length; i++) {
 			HomeGridItem item = new HomeGridItem();
 			item.setMipmapId(R.mipmap.ic_launcher);
 			item.setName(names[i]);
+			item.setActivity(classes.get(i));
 			list.add(item);
 		}
 

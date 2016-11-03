@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -76,11 +77,7 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
 		if (surfaceHolder == null) {
 			throw new IllegalStateException("No SurfaceHolder provided");
 		}
-		if (cameraManager.isOpen()) {
-			Log.w(TAG,
-					"initCamera() while already open -- late SurfaceView callback?");
-			return;
-		}
+
 		try {
 			cameraManager.openDriver(surfaceHolder);
 			if (handler == null) {
@@ -90,6 +87,12 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
 			Log.w(TAG, ioe);
 		} catch (RuntimeException e) {
 			Log.w(TAG, "Unexpected error initializing camera", e);
+		}
+
+		if(!cameraManager.isOpedPermission()){
+			cameraManager.closeDriver();
+			viewfinderView.endAnimator();
+			Toast.makeText(this,"摄像头打开失败",Toast.LENGTH_SHORT).show();
 		}
 
 	}

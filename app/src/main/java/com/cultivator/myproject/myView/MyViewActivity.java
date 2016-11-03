@@ -1,12 +1,20 @@
 package com.cultivator.myproject.myView;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.cultivator.myproject.R;
+import com.cultivator.myproject.common.log.MyLog;
+import com.cultivator.myproject.mclipimage.ShowImageActivity;
+
+import java.io.ByteArrayOutputStream;
 
 public class MyViewActivity extends Activity {
 
@@ -38,11 +46,36 @@ public class MyViewActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				roundprogress.setProgress(10);
-				
+            clipscreen();
 			}
 		});
      
+    }
+
+
+
+    private void clipscreen(){
+        View  view = findViewById(R.id.layout);
+        view.buildDrawingCache();
+
+
+        // 允许当前窗口保存缓存信息
+        view.setDrawingCacheEnabled(true);
+
+        // 去掉状态栏
+        Bitmap bmp =view.getDrawingCache();
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] datas = baos.toByteArray();
+
+        Intent intent = new Intent(this, ShowImageActivity.class);
+        intent.putExtra("bitmap", datas);
+        startActivity(intent);
+
+        // 销毁缓存信息
+        view.destroyDrawingCache();
     }
 
 }

@@ -232,6 +232,13 @@ public class CameraManager {
 		}
 	}
 
+
+
+	public boolean isOpedPermission(){
+		return camera!=null&&previewing&&getFramingRect()!=null;
+	}
+
+
 	/**
 	 * Calculates the framing rect which the UI should draw to show the user
 	 * where to place the barcode. This target helps with alignment as well as
@@ -249,6 +256,11 @@ public class CameraManager {
 			Point screenResolution = configManager.getScreenResolution();
 
 			int width = screenResolution.x * 3 / 4;
+
+
+			if(screenResolution==null){
+				return null;
+			}
 
 
 			if (width < MIN_FRAME_WIDTH) {

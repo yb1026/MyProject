@@ -48,7 +48,7 @@ public class MyApplication extends Application {
 
 
         //个推
-        PushManager.getInstance().initialize(this);
+        //PushManager.getInstance().initialize(this);
 
     }
 

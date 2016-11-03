@@ -8,7 +8,7 @@ import android.app.Activity;
 public class HomeGridItem {
     private int id;
     private int mipmapId;
-    private Activity activity;
+    private Class activity;
     private int position;
     private String name;
 
@@ -28,11 +28,11 @@ public class HomeGridItem {
         this.mipmapId = mipmapId;
     }
 
-    public Activity getActivity() {
+    public Class getActivity() {
         return activity;
     }
 
-    public void setActivity(Activity activity) {
+    public void setActivity(Class activity) {
         this.activity = activity;
     }
 
