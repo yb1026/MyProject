@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.zxing.client.android.QRActivity;
+import com.google.zxing.client.android.util.QrcodeCreater;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -119,6 +120,10 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+
+
+        QrcodeCreater qrcodeCreater = new QrcodeCreater(this);
     }
 
     @Override

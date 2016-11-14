@@ -63,7 +63,7 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
     private void initWebView() {
         initListeners();
         webView.requestFocus();
-        //webView.setWebContentsDebuggingEnabled(true);
+        webView.setWebContentsDebuggingEnabled(true);
         initWebViewSettings();
         //webView.addJavascriptInterface(new JavaScriptInterface(mContext), "JavaScriptInterface");
         initWebViewClient();
@@ -147,7 +147,7 @@ public class RefreshWebView extends SwipeRefreshLayout implements SwipeRefreshLa
 
             @Override
             public void onReceivedSslError(WebView view,
-                        android.webkit.SslErrorHandler handler,
+                                           android.webkit.SslErrorHandler handler,
                                            android.net.http.SslError error) {
                 handler.proceed(); // 信任所有的证书 默认是handler.cancle(),即不做处理
             }

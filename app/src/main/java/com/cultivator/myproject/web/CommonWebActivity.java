@@ -64,7 +64,7 @@ public class CommonWebActivity extends BaseActivity {
 
             @Override
             public void onfinish(WebView view) {
-                loadscript();
+//                loadscript();
             }
         });
 
@@ -90,42 +90,42 @@ public class CommonWebActivity extends BaseActivity {
     }
 
 
-    private void loadscript() {
-
-        MyLog.e("loadscript start");
-
-        InputStream in = null;
-        try {
-            in = getAssets().open("bridge.js");
-
-            byte[] buffer = new byte[in.available()];
-
-            in.read(buffer);
-
-
-            String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
-
-            webView.getWebView().loadUrl("javascript:(function() {" +
-                    "var parent = document.getElementsByTagName('head').item(0);" +
-                    "var script = document.createElement('script');" +
-                    "script.type = 'text/javascript';" +
-                    "script.innerHTML = window.atob('" + encoded + "');" +
-                    "parent.appendChild(script);" +
-                    "})()");
-
-            MyLog.e("loadscript end");
-        } catch (IOException e) {
-            MyLog.e("loadscript error",e);
-        } finally {
-            try {
-                in.close();
-            } catch (IOException e) {
-
-            }
-        }
-
-
-    }
+//    private void loadscript() {
+//
+//        MyLog.e("loadscript start");
+//
+//        InputStream in = null;
+//        try {
+//            in = getAssets().open("bridge.js");
+//
+//            byte[] buffer = new byte[in.available()];
+//
+//            in.read(buffer);
+//
+//
+//            String encoded = Base64.encodeToString(buffer, Base64.NO_WRAP);
+//
+//            webView.getWebView().loadUrl("javascript:(function() {" +
+//                    "var parent = document.getElementsByTagName('head').item(0);" +
+//                    "var script = document.createElement('script');" +
+//                    "script.type = 'text/javascript';" +
+//                    "script.innerHTML = window.atob('" + encoded + "');" +
+//                    "parent.appendChild(script);" +
+//                    "})()");
+//
+//            MyLog.e("loadscript end");
+//        } catch (IOException e) {
+//            MyLog.e("loadscript error",e);
+//        } finally {
+//            try {
+//                in.close();
+//            } catch (IOException e) {
+//
+//            }
+//        }
+//
+//
+//    }
 
 
     @Override

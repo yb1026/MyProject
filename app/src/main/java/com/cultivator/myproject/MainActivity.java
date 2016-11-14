@@ -103,7 +103,6 @@ public class MainActivity extends BaseActivity {
 		classes.add(VibratorRingActivity.class);
 		classes.add(FullscreenActivity.class);
 		classes.add(CommonWebActivity.class);
-		classes.add(CommonWebActivity.class);
 
 
 		for (int i = 0; i < names.length; i++) {
