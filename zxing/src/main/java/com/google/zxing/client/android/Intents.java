@@ -20,6 +20,7 @@ package com.google.zxing.client.android;
  * This class provides the constants to use when sending an Intent to Barcode
  * Scanner. These strings are effectively API and cannot be changed.
  *
+ * @author dswitkin@google.com (Daniel Switkin)
  */
 public final class Intents {
 	private Intents() {

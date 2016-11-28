@@ -44,7 +44,7 @@ public class CommonWebActivity extends BaseActivity {
 
 
         //final String url = getIntent().getStringExtra(IntentConfig.VALUE);
-        final String url = "http://172.19.82.59:8080/invitationRule.html";
+        final String url = "file:///android_asset/mmm.html";
         webView.loadUrl(url);
 
 

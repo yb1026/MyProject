@@ -4,13 +4,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="jquery.js"></script>
-	<!--<script type="text/javascript" src="bridge.js"></script>-->
+	<script type="text/javascript" src="bridge.js"></script>
 <script type="text/javascript">
 
 
 	$(function(){
 		console.log("load html script");
 
+		var promise = bridge.bridge.requestLocation();
+
+		if(promise){
+			promise.then(
+				function(data){
+					console.log("location callback   "+ data.longitude+"   ~~~~"+data.latitude);
+				},
+				function (error){
+					console.log("share callback  "+ data.ret);
+				}
+			);
+		}
 		$("#sub").click(function(){
 			share();
 		});
@@ -19,7 +31,6 @@
 
 	function share() {
 		console.log("share click");
-		console.log(bridge.bridge);
 
 
 		var value = $("#val").val();

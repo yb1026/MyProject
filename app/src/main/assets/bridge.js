@@ -2,7 +2,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.bridge = exports.EndPoints = undefined;
 
@@ -17,128 +17,162 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var counter = 0;
 
 var Request = function () {
-  function Request() {
-    _classCallCheck(this, Request);
+    function Request() {
+        _classCallCheck(this, Request);
 
-    this.id = counter + 1;
-  }
-
-  _createClass(Request, [{
-    key: "toNativeRequest",
-    value: function toNativeRequest() {
-      return {
-        "id": this.id,
-        "endpoint": this.endpoint,
-        "params": this.params
-      };
+        counter += 1;
+        this.id = counter;
     }
-  }]);
 
-  return Request;
+    _createClass(Request, [{
+        key: "toNativeRequest",
+        value: function toNativeRequest() {
+            return {
+                "id": this.id,
+                "endpoint": this.endpoint,
+                "params": this.params
+            };
+        }
+    }]);
+
+    return Request;
 }();
 
 var Bridge = function () {
-  function Bridge() {
-    _classCallCheck(this, Bridge);
+    function Bridge() {
+        _classCallCheck(this, Bridge);
 
-    this.requests = new Map();
-  }
-
-  // 获取位置数据
-
-
-  _createClass(Bridge, [{
-    key: "requestLocation",
-    value: function requestLocation() {
-      var request = this.createRequest();
-      request.endpoint = EndPoints.Location;
-
-      this.postMessage(request);
-      return request.promise;
+        this.requests = new Map();
     }
 
-    // 获取位置数据
+    _createClass(Bridge, [{
+        key: "isDataypNative",
+        value: function isDataypNative() {
+            if (window.bridgeHandler) {
+                console.log('bridge on Android');
+                return true;
+            }
 
-  }, {
-    key: "requestUser",
-    value: function requestUser() {
-      var request = this.createRequest();
-      request.endpoint = EndPoints.User;
-      this.postMessage(request);
+            if (window.webkit && window.webkit.messageHandlers) {
+                var bridgeHandler = window.webkit.messageHandlers.bridgeHandler;
+                if (bridgeHandler) {
+                    console.log('bridge on IOS');
+                    return true;
+                }
+            }
 
-      return request.promise;
-    }
+            return false;
+        }
 
-    // 获取常规数据
+        // 获取位置数据
 
-  }, {
-    key: "requestData",
-    value: function requestData(endpoint) {
-      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    }
-    // TBD:
+    }, {
+        key: "requestLocation",
+        value: function requestLocation() {
+            var request = this.createRequest();
+            request.endpoint = EndPoints.Location;
+
+            this.postMessage(request);
+            return request.promise;
+        }
+
+        // 获取位置数据
+
+    }, {
+        key: "requestUser",
+        value: function requestUser() {
+            var request = this.createRequest();
+            request.endpoint = EndPoints.User;
+
+            this.postMessage(request);
+            return request.promise;
+        }
+
+        // 获取常规数据
+
+    }, {
+        key: "requestData",
+        value: function requestData(endpoint) {
+            var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        }
+        // TBD:
 
 
-    // 发送邀请
+        // 发送邀请
 
-  }, {
-    key: "sendInvitation",
-    value: function sendInvitation(val) {
-      var request = this.createRequest();
-      request.endpoint = EndPoints.SendInvitation;
-      request.params = val;
-      this.postMessage(request);
+    }, {
+        key: "sendInvitation",
+        value: function sendInvitation(val) {
+            var request = this.createRequest();
+            request.endpoint = EndPoints.SendInvitation;
+            request.params = val;
 
-      return request.promise;
-    }
+            this.postMessage(request);
+            return request.promise;
+        }
 
-    // 创建请求
+        // 创建请求
 
-  }, {
-    key: "createRequest",
-    value: function createRequest(endpoint) {
-      var request = new Request();
-      var promise = new Promise(function (resolve, reject) {
-        request.resolver = resolve;
-        request.rejecter = reject;
-      });
-      request.promise = promise;
+    }, {
+        key: "createRequest",
+        value: function createRequest(endpoint) {
+            var request = new Request();
+            var promise = new Promise(function (resolve, reject) {
+                request.resolver = resolve;
+                request.rejecter = reject;
+            });
+            request.promise = promise;
 
-      return request;
-    }
+            return request;
+        }
 
-    // 传递消息给 Native 方
+        // 传递消息给 Native 方
 
-  }, {
-    key: "postMessage",
-    value: function postMessage(request) {
-      this.requests.set(request.id, request);
-      var object = request.toNativeRequest();
-      // window.webkit.messageHandlers.bridgeHandler.postMessage(object)
+    }, {
+        key: "postMessage",
+        value: function postMessage(request) {
+            this.requests.set(request.id, request);
+            var object = request.toNativeRequest();
 
-      if (window.bridgeHandler) {
-        window.bridgeHandler.postMessage(JSON.stringify(object));
-      } else {
-        window.postMessage(JSON.stringify(object));
-      }
-    }
+            if (!this.isDataypNative()) {
+                console.log('bridge on UnkownBrowser');
+                return;
+            }
+            console.log('bridge call Native postMessage  endpoint=' + request.endpoint);
+            if (window.bridgeHandler) {
+                window.bridgeHandler.postMessage(JSON.stringify(object));
+            } else {
+                var bridgeHandler = window.webkit.messageHandlers.bridgeHandler;
+                if (bridgeHandler) {
+                    bridgeHandler.postMessage(JSON.stringify(object));
+                }
+            }
+        }
 
-    // 当 Native 方获取结果后会回调此方法
+        // 当 Native 方获取结果后会回调此方法
 
-  }, {
-    key: "onNativeCallback",
-    value: function onNativeCallback(reqID, result, retJson) {
-      var request = this.requests.get(reqID);
-      if (result === 0) {
-        request.resolver(object);
-      } else {
-        request.rejecter(object);
-      }
-      this.requests.delete(reqID);
-    }
-  }]);
+    }, {
+        key: "onNativeCallback",
+        value: function onNativeCallback(reqID, result, ret) {
+            var request = this.requests.get(reqID);
 
-  return Bridge;
+            var object = {};
+            if (ret) {
+                object = ret;
+            }
+
+            if (request) {
+                if (result === 0) {
+                    request.resolver(object);
+                } else {
+                    request.rejecter(object);
+                }
+                this.requests.delete(reqID);
+            }
+        }
+    }]);
+
+    return Bridge;
 }();
 
 // 功能点列表
@@ -146,12 +180,12 @@ var Bridge = function () {
 
 var EndPoints = exports.EndPoints = {
 
-  // 数据
-  Location: 'Location',
-  User: 'User',
+    // 数据
+    Location: 'Location',
+    User: 'User',
 
-  // 动作
-  SendInvitation: 'SendInvitation'
+    // 动作
+    SendInvitation: 'SendInvitation'
 };
 var bridge = exports.bridge = new Bridge();
 

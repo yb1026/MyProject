@@ -19,6 +19,7 @@ import com.cultivator.myproject.common.view.drage.HomeGridItem;
 import com.cultivator.myproject.mclipimage.ClipImageActivity;
 import com.cultivator.myproject.myView.MyViewActivity;
 import com.cultivator.myproject.web.CommonWebActivity;
+import com.google.zxing.client.android.util.QrcodeCreater;
 
 public class MainActivity extends BaseActivity {
 
@@ -34,6 +35,7 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		initView();
+		QrcodeCreater q = new QrcodeCreater(this);
 	}
 
 

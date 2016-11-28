@@ -28,6 +28,8 @@ import com.google.zxing.LuminanceSource;
  *
  * It works for any pixel format where the Y channel is planar and appears
  * first, including YCbCr_420_SP and YCbCr_422_SP.
+ *
+ * @author dswitkin@google.com (Daniel Switkin)
  */
 public final class PlanarYUVLuminanceSource extends LuminanceSource {
 

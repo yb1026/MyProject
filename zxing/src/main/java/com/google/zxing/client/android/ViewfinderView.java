@@ -33,6 +33,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 
+import com.cultivator.zxing.R;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
 
@@ -82,6 +83,7 @@ public final class ViewfinderView extends View {
         scannerAlpha = 0;
         possibleResultPoints = new ArrayList<ResultPoint>(5);
         lastPossibleResultPoints = null;
+        currentY = 0;
     }
 
     @Override
@@ -101,8 +103,9 @@ public final class ViewfinderView extends View {
                 paint);
         canvas.drawRect(0, frame.bottom + 1, width, height, paint);
 
+
         Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(),
-                getResources().getIdentifier("barcode_focus_img", "drawable", getContext().getPackageName()));
+                R.mipmap.barcode_focus_img);
         // canvas.drawBitmap(bitmap, frame.left, frame.top, paint);
         RectF dst = new RectF();
         dst.bottom = frame.bottom;
@@ -174,6 +177,7 @@ public final class ViewfinderView extends View {
             anim.end();
         }
     }
+
 
     public void drawViewfinder() {
         resultBitmap = null;

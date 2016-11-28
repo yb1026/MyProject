@@ -22,6 +22,7 @@ import android.provider.Contacts;
  * The set of constants to use when sending Barcode Scanner an Intent which
  * requests a barcode to be encoded.
  *
+ * @author dswitkin@google.com (Daniel Switkin)
  */
 public final class Contents {
 	private Contents() {

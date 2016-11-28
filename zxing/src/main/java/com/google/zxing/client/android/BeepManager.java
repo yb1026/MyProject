@@ -27,6 +27,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 
+import com.cultivator.zxing.R;
 
 import java.io.IOException;
 
@@ -99,7 +100,7 @@ public final class BeepManager {
 				});
 
 		AssetFileDescriptor file = activity.getResources().openRawResourceFd(
-				activity.getResources().getIdentifier("beep","raw",activity.getPackageName()));
+				R.raw.beep);
 		try {
 			mediaPlayer.setDataSource(file.getFileDescriptor(),
 					file.getStartOffset(), file.getLength());

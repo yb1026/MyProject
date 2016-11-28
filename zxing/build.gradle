@@ -5,32 +5,16 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
     }
 
-    signingConfigs {
-        release {
-            keyAlias 'key'
-            keyPassword '123456'
-            storeFile file('/Users/yb1026/Documents/git/mProjects/mykey.jks')
-            storePassword '123456'
-        }
+    sourceSets {
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles 'proguard-rules.pro'
-            debuggable false
-            signingConfig signingConfigs.release
-        }
-        debug{
-            debuggable true
-            signingConfig signingConfigs.release
-        }
+    productFlavors {
     }
 }
 

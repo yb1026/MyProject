@@ -89,7 +89,7 @@ public class QRActivity extends Activity implements SurfaceHolder.Callback {
 			Log.w(TAG, "Unexpected error initializing camera", e);
 		}
 
-		if(!cameraManager.isOpedPermission()){
+		if(!cameraManager.isOpenPermission()){
 			cameraManager.closeDriver();
 			viewfinderView.endAnimator();
 			Toast.makeText(this,"摄像头打开失败",Toast.LENGTH_SHORT).show();
