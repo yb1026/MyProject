@@ -1,8 +1,12 @@
 package com.cultivator.myproject.web.javascript;
 
+import android.support.annotation.Keep;
+
 /**
  * Created by yb1026 on 2016/11/3.
  */
+
+@Keep
 public  class Request {
 
     private int id;

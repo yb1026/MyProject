@@ -1,6 +1,7 @@
 package com.cultivator.myproject.web.javascript;
 
 import android.content.Context;
+import android.support.annotation.Keep;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.cultivator.myproject.common.util.Utils;
 import java.util.HashMap;
 import java.util.Map;
 
+@Keep
 public class JavaScriptInterface {
 
     private WebView webView;
